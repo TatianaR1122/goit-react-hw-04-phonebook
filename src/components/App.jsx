@@ -11,6 +11,10 @@ export default function App() {
   });
   const [filter, setFilter] = useState('');
 
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
   const formSubmitHandler = ({ name, number }) => {
     const contact = { name, number, id: nanoid() };
 
@@ -44,10 +48,6 @@ export default function App() {
       prevContacts.filter(contact => contact.id !== contactId)
     );
   };
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
 
   const visibleContact = getVisibleContacts();
 
